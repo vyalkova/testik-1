@@ -3,18 +3,23 @@
 
 <script>
 
-a = prompt("Сколько тебе лет?")
-count_ages = Number(a)
-if (Number(a) > 80 || Number(a) <= 4) 
-{
-	alert("Фатал еррор") 
-} else { 
-	alert("Привет")
+var is_age_valid = false;
+while (is_age_valid == false) {
+
+	var a = prompt("Сколько тебе лет?");
+	var count_ages = Number(a);
+	if (4 < count_ages && count_ages <= 80) {
+		alert("Привет");
+		is_age_valid = true;
+	} else {
+		alert("Фатал еррор");
+	}
+
 }
 
 if (count_ages < 30) {
-	alert("Молодой!Э")
-	alert("Доступ открыт!")
+    alert("Молодой!Э");
+    alert("Доступ открыт!");
 }
 
 </script>
