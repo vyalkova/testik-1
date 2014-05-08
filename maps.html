@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <title>Пример 1</title>
+    <script src="http://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru_RU" type="text/javascript"></script>
+</head>
+
+<body>
+    <div id="map" style="width: 100%; height: 500px;"></div>
+
+    <h1>СУПЕР КАРТА!</h1>
+	<script>
+
+ymaps.ready(init);
+var myMap;
+var myPlacemark;
+var myPlace;
+
+var points = [
+	[56.841525, 60.61392, 'Универ!'],
+	[56.823871, 60.581497, 'ДОМ №1'],
+	[56.85714, 60.636761, 'ДОМ №2'],
+	[56.858339, 60.654308, 'ДОМ №3']
+];
+
+function init() {
+    myMap = new ymaps.Map("map", {
+        center: [56.86, 60.64],
+        zoom: 10
+    });
+
+	var i = 0;
+	while(i < points.length) {
+		var point = points[i];
+		
+		var x = point[0];
+		var y = point[1];
+		var text = point[2];
+		
+		var placemark = new ymaps.Placemark([x, y], {
+			content: text,
+			balloonContent: text + " тут!Э"
+		});
+		myMap.geoObjects.add(placemark);
+		i = i + 1; // i++;
+	}
+
+	var myControlGroup = new ymaps.control.Group({
+        items: [
+        new ymaps.control.Button('Первый'), 
+		new ymaps.control.Button('Второй'), 
+		new ymaps.control.Button('Расчет окончен')
+		]
+		}, {
+        selectOnClick: false
+	});
+    myControlGroup.events.add(['click'], function(e) {
+        alert(e.get('target').data.get('content'));
+    });
+    //myMap.controls.add(myControlGroup);
+    //myMap.behaviors.enable('ruler');
+	
+    myMap.controls.add(new ymaps.control.ZoomControl());
+    myMap.controls.add('searchControl');
+	
+	
+	
+}
+    </script>
+</body>
+</html>
